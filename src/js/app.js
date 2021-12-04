@@ -1,6 +1,2 @@
-export default function works() {
-  // eslint-disable-next-line no-console
-  console.log('it works!');
-}
+console.log('it works!');
 
-works();
