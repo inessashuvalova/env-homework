@@ -10,8 +10,12 @@ cache: node_modules  # кеширование
 
 install:
   - yarn  # команда установки зависимостей
+  - yarn add push-dir
 
-build: off  # отключаем встроенную в appveyor систему сборки
+build: off # отключаем встроенную в appveyor систему сборки
+
+build_script:  # отключаем встроенную в appveyor систему сборки
+ - yarn build
 
 test_script:
   - yarn lint && yarn test  # скрипт тестирования
@@ -21,4 +25,4 @@ deploy_script:  # скрипт развёртывания
   - git config --global user.name AppVeyor
   - git config --global user.email ci@appveyor.com
   - echo "https://$token:x-oauth-basic@github.com" > "$HOME/.git-credentials"
-  - npx push-dir --dir=dist --branch=gh-pages --force --verbose
+  - yarn run push-dir --dir=dist --branch=gh-pages --force --verbose

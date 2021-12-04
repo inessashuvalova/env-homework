@@ -2,11 +2,21 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+// configure source and distribution folder paths
+const srcFolder = 'src';
+const distFolder = 'dist';
+
 module.exports = {
-  target: 'web',
+  // entry point for application
+  entry: {
+    app: path.join(__dirname, srcFolder, 'index.js'),
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    path: path.resolve(__dirname, distFolder),
+    // ... next 2 lines we r fighting with Error: Universal Chunk Loading is not implemented yet at EnableChunkLoadingPlugin.apply
+    // chunkLoading: false,
+    // wasmLoading: false,
+    // ...
   },
   module: {
     rules: [
@@ -27,13 +37,18 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader, 'css-loader',
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.svg$/,
-        type: 'asset/resource',
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: true,
+            },
+          },
+        ],
       },
     ],
   },
@@ -41,6 +56,7 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html',
+      favicon: './src/favicon.ico',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
