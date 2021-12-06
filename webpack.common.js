@@ -11,17 +11,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(png|jpg|gif|ico|svg)$/i,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8192,
-                        },
-                    },
-                ],
-            },
-            {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
@@ -42,6 +31,18 @@ module.exports = {
                     MiniCssExtractPlugin.loader, 'css-loader',
                 ],
             },
+            {
+                test: /\.(png|jpg|gif|ico|svg)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: true,
+                        },
+                    },
+                ],
+            },
+
         ],
     },
     plugins: [
