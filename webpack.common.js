@@ -35,18 +35,18 @@ module.exports = {
                 test: /\.svg$/,
                 loader: 'svg-inline-loader'
             },
-            {
-                test: /\.(png|jpg|gif|ico|svg)$/i,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: true,
-                        },
-                    },
+            // {
+            //     test: /\.(png|jpg|gif|ico|svg)$/i,
+            //     use: [
+            //         {
+            //             loader: 'url-loader',
+            //             options: {
+            //                 limit: true,
+            //             },
+            //         },
 
-                ],
-            },
+            //     ],
+            // },
 
         ],
     },
