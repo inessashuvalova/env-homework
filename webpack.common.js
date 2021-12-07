@@ -1,6 +1,5 @@
 const path = require('path');
-const CopyWebpackPlugin = require('copy-webpack-plugin'),
-const HtmlWebPackPlugin = require('html-webpack-plugin'),
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -33,6 +32,10 @@ module.exports = {
                 ],
             },
             {
+                test: /\.(png|jpg|svg)$/,
+                loader: 'svg-url-loader?img/[name].[ext]' // inline base64 URLs for <=10kb images, direct URLs for the rest
+            },
+            {
                 test: /\.(png|jpg|gif|ico|svg)$/i,
                 use: [
                     {
@@ -47,10 +50,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new CopyWebpackPlugin([{
-            from: './src/img',
-            to: 'dist' + './src/img'
-        }]),
         new HtmlWebPackPlugin({
             template: './src/index.html',
             filename: './index.html',
