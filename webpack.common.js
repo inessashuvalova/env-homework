@@ -32,6 +32,10 @@ module.exports = {
                 ],
             },
             {
+                test: /\.svg$/,
+                loader: 'svg-inline-loader'
+            },
+            {
                 test: /\.(png|jpg|gif|ico|svg)$/i,
                 use: [
                     {
@@ -40,6 +44,7 @@ module.exports = {
                             limit: true,
                         },
                     },
+
                 ],
             },
 
