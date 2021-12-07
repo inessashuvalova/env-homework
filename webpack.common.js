@@ -32,10 +32,6 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(png|jpg|svg)$/,
-                loader: 'svg-url-loader?name=img/[name].[ext]' // inline base64 URLs for <=10kb images, direct URLs for the rest
-            },
-            {
                 test: /\.(png|jpg|gif|ico|svg)$/i,
                 use: [
                     {
