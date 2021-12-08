@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     target: 'web',
@@ -21,7 +22,7 @@ module.exports = {
                 test: /\.html$/,
                 use: [
                     {
-                        loader: 'html-loader',
+                        loader: 'raw-loader',
                     },
                 ],
             },
@@ -31,23 +32,6 @@ module.exports = {
                     MiniCssExtractPlugin.loader, 'css-loader',
                 ],
             },
-            {
-                test: /\.svg$/,
-                loader: 'svg-inline-loader'
-            },
-            // {
-            //     test: /\.(png|jpg|gif|ico|svg)$/i,
-            //     use: [
-            //         {
-            //             loader: 'url-loader',
-            //             options: {
-            //                 limit: true,
-            //             },
-            //         },
-
-            //     ],
-            // },
-
         ],
     },
     plugins: [
@@ -58,6 +42,22 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].css',
             chunkFilename: '[id].css',
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: "./src/fonts",
+                    to: "./fonts",
+                },
+                {
+                    from: "./src/favicon",
+                    to: "./favicon",
+                },
+                {
+                    from: "./src/img",
+                    to: "./img",
+                },
+            ],
         }),
     ],
 };
